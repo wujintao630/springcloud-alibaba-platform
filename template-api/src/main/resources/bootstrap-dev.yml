@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  cloud:
+    nacos:
+      #nacos注册中心
+      discovery:
+        server-addr: localhost:8848
+        group: tonytaotao
+      #nacos配置中心
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: 07ecdcda-6827-44cf-96f3-8c6d6c76a2f2
+        #shared-configs:
+        #  - data-id: shard.yml
+        #    refresh: true
+        #extension-configs:
+        #  - data-id: extension.yml
+        #    refresh: true
+
+#feign配置
+template-business:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    connectTimeout: 2000
+    readTimeout: 2000
+
+feign:
+  client:
+    config:
+      template-business:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+
+
+#日志配置
+logging:
+  config: classpath:logConfig/log4j2-dev.xml

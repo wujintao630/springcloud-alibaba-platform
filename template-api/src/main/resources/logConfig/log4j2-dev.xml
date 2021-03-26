@@ -49,6 +49,12 @@
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
 
+        <!-- feign日志  -->
+        <Logger additivity="false" name="com.tonytaotao.sca.api.invoke.BusinessFeign" level="DEBUG">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+
+
         <Root level="INFO" includeLocation="true">
             <!--开发过程可以开启，生产要求屏蔽-->
             <AppenderRef ref="CONSOLE"/>

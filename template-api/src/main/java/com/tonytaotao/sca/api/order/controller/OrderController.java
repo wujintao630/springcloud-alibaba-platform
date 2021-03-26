@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-10-25
 */
 @RestController
-@RequestMapping("/order/order")
+@RequestMapping("/order")
 @Slf4j
 public class OrderController {
 

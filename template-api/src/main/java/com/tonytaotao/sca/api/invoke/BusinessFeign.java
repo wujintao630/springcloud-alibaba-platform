@@ -23,7 +23,7 @@ public interface BusinessFeign {
      * @return
      */
     @GetMapping("/business/account/getUserAccountDetail/{id}")
-    GlobalResult<UserAccountVO> getUserAccount(@PathVariable Long id);
+    GlobalResult<UserAccountVO> getUserAccount(@PathVariable("id") Long id);
 
     /**
      * 扣减用户余额
