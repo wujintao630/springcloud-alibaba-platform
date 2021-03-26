@@ -7,7 +7,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -49,10 +52,10 @@ public class GlobalExceptionHandler {
         }).collect(Collectors.joining(", "));
         errorMsg.append(msg).append(".");
 
-        GlobalResult result = GlobalResult.DefaultFailure("500", errorMsg.toString());
-        result.setRequestId(GlobalIDHandler.getId());
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg.toString());
+        globalResult.setRequestId(GlobalIDHandler.getId());
 
-        return result;
+        return globalResult;
     }
 
     /**
@@ -74,10 +77,10 @@ public class GlobalExceptionHandler {
 
         errorMsg.append(msg).append(".");
 
-        GlobalResult result = GlobalResult.DefaultFailure("500", errorMsg.toString());
-        result.setRequestId(GlobalIDHandler.getId());
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg.toString());
+        globalResult.setRequestId(GlobalIDHandler.getId());
 
-        return result;
+        return globalResult;
     }
 
     /**
@@ -92,10 +95,10 @@ public class GlobalExceptionHandler {
         log.error(GlobalIDHandler.getId(), e);
 
         String errorMsg = "系统异常:" + e.getMessage();
-        GlobalResult result = GlobalResult.DefaultFailure("500", errorMsg);
-        result.setRequestId(GlobalIDHandler.getId());
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg);
+        globalResult.setRequestId(GlobalIDHandler.getId());
 
-        return result;
+        return globalResult;
     }
 
 

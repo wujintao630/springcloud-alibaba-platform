@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -32,16 +33,30 @@ public class PlaceOrderReq implements Serializable {
     @ApiModelProperty(value = "用户ID")
     @NotNull(message = "{param.null}")
     private Long userId;
+
     /**
      * 商品ID
      */
     @ApiModelProperty(value = "商品ID")
     private Long commodityId;
+
     /**
      * 数量
      */
     @ApiModelProperty(value = "数量")
     private Integer quantity;
+
+    /**
+     * 单价
+     */
+    @ApiModelProperty(value = "单价")
+    private BigDecimal unitPrice;
+
+    /**
+     * 总金额
+     */
+    @ApiModelProperty(value = "总金额")
+    private BigDecimal totalMoney;
 
     /**
      * 备注

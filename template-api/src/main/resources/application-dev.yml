@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 8080
   servlet:
     context-path: /api
 
@@ -9,6 +9,13 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
+
+  cloud:
+    #nacos注册配置中心
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        group: tonytaotao
 
 #日志配置
 logging:

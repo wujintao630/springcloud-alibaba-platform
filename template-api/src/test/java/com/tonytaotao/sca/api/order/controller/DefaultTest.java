@@ -1,3 +1,4 @@
+/*
 package com.tonytaotao.sca.api.order.controller;
 
 import com.alibaba.fastjson.JSONObject;
@@ -20,8 +21,10 @@ class DefaultTest {
     @Autowired
     private OrderController orderController;
 
-    /*@MockBean
-    private OrderService orderServiceMock;*/
+    */
+/*@MockBean
+    private OrderService orderServiceMock;*//*
+
 
     @SpyBean
     private OrderService orderServiceSpy;
@@ -31,14 +34,17 @@ class DefaultTest {
 
         UserOrder userOrder = null;
 
-        /*// 测试 no mock : 直接调用mock类中的方法，不会调用真实方法，直接返回 null
+        */
+/*//*
+/ 测试 no mock : 直接调用mock类中的方法，不会调用真实方法，直接返回 null
         UserOrder userOrder = orderServiceMock.getById(1L);
         System.out.println(" no mock : " + JSONObject.toJSONString(userOrder));
 
         // 测试 mock : 会返回 thenReturn 自定义数据
         when(orderServiceMock.getById(1L)).thenReturn(new UserOrder().setId(2L));
         userOrder = orderServiceMock.getById(1L);
-        System.out.println(" mock : " + JSONObject.toJSONString(userOrder));*/
+        System.out.println(" mock : " + JSONObject.toJSONString(userOrder));*//*
+
 
         // 测试 no spy : 直接调用spy类中的方法，会调用真实方法，返回真实结果
         userOrder = orderServiceSpy.getById(1L);
@@ -53,4 +59,4 @@ class DefaultTest {
     }
 
 
-}
+}*/

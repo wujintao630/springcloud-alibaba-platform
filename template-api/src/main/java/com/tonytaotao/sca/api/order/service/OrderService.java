@@ -1,6 +1,7 @@
 package com.tonytaotao.sca.api.order.service;
 
 import com.tonytaotao.sca.api.order.vo.PlaceOrderReq;
+import com.tonytaotao.sca.common.base.GlobalResult;
 
 /**
  * <p>
@@ -12,6 +13,6 @@ import com.tonytaotao.sca.api.order.vo.PlaceOrderReq;
  */
 public interface OrderService {
 
-    Boolean  placeOrder(PlaceOrderReq placeOrderReq);
+    GlobalResult<String> placeOrder(PlaceOrderReq placeOrderReq);
 
 }

@@ -36,8 +36,8 @@ public class OrderController {
      */
     @ApiOperation(value = "下订单", notes = "下订单")
     @PostMapping("/placeOrder")
-    public GlobalResult<Boolean> placeOrder(@RequestBody @ApiParam(value = "下单请求json对象", required = true) @Validated PlaceOrderReq placeOrderReq) {
-        return new GlobalResult<>(service.placeOrder(placeOrderReq));
+    public GlobalResult placeOrder(@RequestBody @ApiParam(value = "下单请求json对象", required = true) @Validated PlaceOrderReq placeOrderReq) {
+        return GlobalResult.DefaultSuccess(service.placeOrder(placeOrderReq));
     }
 
 }

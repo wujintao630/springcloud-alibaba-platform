@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tonytaotao.sca.business.entity.UserAccount;
 import com.tonytaotao.sca.business.service.UserAccountService;
+import com.tonytaotao.sca.common.vo.UserAccountVO;
 import com.tonytaotao.sca.common.base.GlobalResult;
-import com.tonytaotao.sca.common.base.QueryPage;
+import com.tonytaotao.sca.business.common.QueryPage;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +26,7 @@ import java.util.List;
  * @since 2019-10-22
 */
 @RestController
-@RequestMapping("/account/userAccount")
+@RequestMapping("/account")
 @Slf4j
 public class UserAccountController {
 
@@ -39,9 +41,16 @@ public class UserAccountController {
     @ApiOperation(value = "获取详细信息", notes = "根据url的id来获取详细信息")
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "Path")
     @GetMapping("/getUserAccountDetail/{id}")
-    public GlobalResult<UserAccount> getUserAccountDetailById(@PathVariable Long id) {
+    public GlobalResult<UserAccountVO> getUserAccountDetailById(@PathVariable Long id) {
 
-        return new GlobalResult<>(userAccountService.getById(id));
+        UserAccount userAccount = userAccountService.getById(id);
+        if (userAccount != null) {
+            UserAccountVO userAccountVO = new UserAccountVO();
+            BeanUtils.copyProperties(userAccount, userAccountVO);
+            return GlobalResult.DefaultSuccess(userAccountVO);
+        }
+        return GlobalResult.DefaultFailure("数据不存在");
+
     }
 
     /**
@@ -53,19 +62,21 @@ public class UserAccountController {
     @PostMapping("/getUserAccountPage")
     public GlobalResult<IPage<List<UserAccount>>> getUserAccountPage(@RequestBody @ApiParam(value = "查询条件json对象", required = true) QueryPage<UserAccount> query) {
         IPage page = userAccountService.page(query.getPage(), new QueryWrapper<>(query.getQueryEntity()));
-        return new GlobalResult<>(page);
+        return GlobalResult.DefaultSuccess(page);
     }
 
     /**
     * 新增或者更新信息
-     * @param entity
+     * @param userAccountVO
      *@return
     */
     @ApiOperation(value = "新增或者更新信息", notes = "新增或者更新信息")
-    @ApiImplicitParam(name = "entity", value = "要保存的json对象", required = true, paramType = "body", dataType = "UserAccount")
+    @ApiImplicitParam(name = "userAccountVO", value = "要保存的json对象", required = true, paramType = "body", dataType = "UserAccount")
     @PostMapping("/saveOrUpdateUserAccount")
-    public GlobalResult saveOrUpdateUserAccount(@RequestBody UserAccount entity) {
-        userAccountService.saveOrUpdateUserAccount(entity);
+    public GlobalResult<String> saveOrUpdateUserAccount(@RequestBody UserAccountVO userAccountVO) {
+        UserAccount userAccount = new UserAccount();
+        BeanUtils.copyProperties(userAccountVO, userAccount);
+        userAccountService.saveOrUpdateUserAccount(userAccount);
         return GlobalResult.DefaultSuccess();
     }
 
@@ -78,7 +89,7 @@ public class UserAccountController {
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "Path")
     @DeleteMapping("/deleteUserAccountById/{id}")
     public GlobalResult<Boolean> deleteUserAccountById(@PathVariable Long id) {
-        return new GlobalResult<>(userAccountService.deleteUserAccountById(id));
+        return GlobalResult.DefaultSuccess(userAccountService.deleteUserAccountById(id));
     }
 
 }

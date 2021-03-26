@@ -1,4 +1,4 @@
-package com.tonytaotao.sca.common.base;
+package com.tonytaotao.sca.business.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;

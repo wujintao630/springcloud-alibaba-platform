@@ -1,3 +1,4 @@
+/*
 package com.tonytaotao.sca.api.order.controller;
 
 import com.alibaba.fastjson.JSONObject;
@@ -30,7 +31,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 //@WebMvcTest
 class MockMvcTest {
 
-    /*---------------------普通单元测试--------------------*/
+    */
+/*---------------------普通单元测试--------------------*//*
+
 
     @Autowired
     private OrderController orderController;
@@ -40,9 +43,12 @@ class MockMvcTest {
         System.out.println(JSONObject.toJSONString(globalResult));
     }
 
-    /*---------------------真实http测试--------------------*/
+    */
+/*---------------------真实http测试--------------------*//*
+
     // 配置了 webEnvironment ，真实的http请求
-    /*
+    */
+/*
     @LocalServerPort
     private Integer port;
     @Autowired
@@ -52,10 +58,14 @@ class MockMvcTest {
         GlobalResult<UserOrder> globalResult = testRestTemplate.getForObject("http://localhost:" + port + "/order/order/order/getOrderDetail/1", GlobalResult.class);
         System.out.println(JSONObject.toJSONString(globalResult));
     }
-    */
+    *//*
 
-    /*---------------------mock http测试--------------------*/
-    /*
+
+    */
+/*---------------------mock http测试--------------------*//*
+
+    */
+/*
     @Autowired
     private MockMvc mockMvc;
 
@@ -79,5 +89,6 @@ class MockMvcTest {
         String contentBody = mvcResult.getResponse().getContentAsString();
         System.out.println(contentBody);
 
-    }*/
-}
+    }*//*
+
+}*/

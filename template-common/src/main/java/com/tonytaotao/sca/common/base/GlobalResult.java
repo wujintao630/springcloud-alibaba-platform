@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 public class GlobalResult<T> {
 
-    private String requestId;
+    private static String SUCCESS_CODE = "0";
+    private static String FAILURE_CODE = "-1";
 
     private String code;
 
@@ -19,14 +20,12 @@ public class GlobalResult<T> {
 
     private T data;
 
-    public GlobalResult() {
-        this.code = "0";
-        this.msg = "OK";
-    }
+    private String requestId;
 
-    public GlobalResult(T data) {
-        this.code = "0";
-        this.msg = "OK";
+    public GlobalResult(String code, String msg, Boolean success, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.success = success;
         this.data = data;
     }
 
@@ -34,12 +33,20 @@ public class GlobalResult<T> {
         return DefaultSuccess("OK");
     }
 
+    public static<T> GlobalResult DefaultSuccess(T data) {
+        return DefaultSuccess(SUCCESS_CODE, "OK", data);
+    }
+
     public static GlobalResult DefaultSuccess(String msg) {
-        GlobalResult globalResult = new GlobalResult();
-        globalResult.setCode("0");
-        globalResult.setMsg(msg);
-        globalResult.setSuccess(Boolean.TRUE);
-        return globalResult;
+        return DefaultSuccess(SUCCESS_CODE, msg);
+    }
+
+    public static GlobalResult DefaultSuccess(String code, String msg) {
+        return DefaultSuccess(code, msg, null);
+    }
+
+    public static<T> GlobalResult DefaultSuccess(String code, String msg, T data) {
+        return new GlobalResult(code, msg, Boolean.TRUE, data);
     }
 
     public static GlobalResult DefaultFailure() {
@@ -47,14 +54,18 @@ public class GlobalResult<T> {
     }
 
     public static GlobalResult DefaultFailure(String msg) {
-        return DefaultFailure("-1", msg);
+        return DefaultFailure(FAILURE_CODE, msg);
     }
 
     public static GlobalResult DefaultFailure(String code, String msg) {
-        GlobalResult globalResult = new GlobalResult();
-        globalResult.setCode(code);
-        globalResult.setMsg(msg);
-        globalResult.setSuccess(Boolean.FALSE);
-        return globalResult;
+        return new GlobalResult(code, msg, Boolean.FALSE, null);
+    }
+
+    public boolean isSuccess() {
+        return success.booleanValue() == Boolean.TRUE.booleanValue();
+    }
+
+    public boolean isFailure() {
+        return success.booleanValue() == Boolean.FALSE.booleanValue();
     }
 }

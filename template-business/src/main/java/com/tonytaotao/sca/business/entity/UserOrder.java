@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -52,7 +53,7 @@ public class UserOrder extends Model<UserOrder> {
      * 总金额
      */
     @ApiModelProperty(value = "总金额")
-    private Double totalMoney;
+    private BigDecimal totalMoney;
 
 
     @Override

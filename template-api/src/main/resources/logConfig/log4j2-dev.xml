@@ -8,7 +8,7 @@
 <configuration status="warn" monitorInterval="60">
 
     <properties>
-        <property name="logpath" value="./logs" />
+        <property name="logpath" value="/data/logs/template-api" />
     </properties>
 
     <appenders>
@@ -48,14 +48,6 @@
 
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
-
-        <!-- sql语句, 生产环境需屏蔽, 由于log4j2不支持通配符，且每个模块MVC都放在单独的包下，因此，需要每个模块的mapper都要在此定义，才能打印sql debug 日志 -->
-        <Logger additivity="false" name="com.tonytaotao.springboot.dubbo.user.mapper" level="DEBUG">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
-        <Logger additivity="false" name="com.tonytaotao.springboot.dubbo.account.mapper" level="DEBUG">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
 
         <Root level="INFO" includeLocation="true">
             <!--开发过程可以开启，生产要求屏蔽-->
