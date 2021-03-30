@@ -1,5 +1,6 @@
 package com.tonytaotao.sca.api.invoke;
 
+import com.tonytaotao.sca.common.vo.CommodityStorageVO;
 import com.tonytaotao.sca.common.vo.UserAccountVO;
 import com.tonytaotao.sca.common.base.GlobalResult;
 import com.tonytaotao.sca.common.vo.UserOrderVO;
@@ -30,8 +31,16 @@ public interface BusinessFeign {
      * @param userAccountVO
      * @return
      */
-    @PostMapping("/business/account/saveOrUpdateUserAccount")
+    @PostMapping("/business/account/subUserAccountBalance")
     GlobalResult<String> subUserAccountBalance(@RequestBody UserAccountVO userAccountVO);
+
+    /**
+     * 扣减商品库存
+     * @param commodityStorageVO
+     * @return
+     */
+    @PostMapping("/business/commodityStorage/subCommodityStorage")
+    GlobalResult<String> subCommodityStorage(@RequestBody CommodityStorageVO commodityStorageVO);
 
     /**
      * 增加订单

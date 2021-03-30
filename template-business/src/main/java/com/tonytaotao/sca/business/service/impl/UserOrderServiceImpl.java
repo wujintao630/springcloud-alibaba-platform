@@ -8,12 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- *  服务接口实现类
- * </p>
- *
+ *  用户订单服务接口实现
  * @author tonytaotao
- * @since 2019-10-25
  */
 @Service
 @Slf4j

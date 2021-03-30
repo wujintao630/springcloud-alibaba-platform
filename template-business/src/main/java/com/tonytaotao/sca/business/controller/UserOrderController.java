@@ -18,12 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
-* <p>
-*      前端控制器
-* </p>
- *
+ * 用户订单API
  * @author tonytaotao
- * @since 2019-10-25
 */
 @RestController
 @RequestMapping("/order")
@@ -63,7 +59,7 @@ public class UserOrderController {
      *@return
     */
     @ApiOperation(value = "新增或者更新信息", notes = "新增或者更新信息")
-    @ApiImplicitParam(name = "entity", value = "要保存的json对象", required = true, paramType = "body", dataType = "UserOrder")
+    @ApiImplicitParam(name = "entity", value = "要保存的json对象", required = true, paramType = "body", dataType = "UserOrderVO")
     @PostMapping("/saveOrUpdateOrder")
     public GlobalResult<String> saveOrUpdateOrder(@RequestBody UserOrderVO userOrderVO) {
         UserOrder userOrder = new UserOrder();

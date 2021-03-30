@@ -3,6 +3,7 @@ package com.tonytaotao.sca.api.order.service.impl;
 import com.tonytaotao.sca.api.invoke.BusinessFeign;
 import com.tonytaotao.sca.api.order.vo.PlaceOrderReq;
 import com.tonytaotao.sca.api.order.service.OrderService;
+import com.tonytaotao.sca.common.vo.CommodityStorageVO;
 import com.tonytaotao.sca.common.vo.UserAccountVO;
 import com.tonytaotao.sca.common.base.GlobalResult;
 import com.tonytaotao.sca.common.vo.UserOrderVO;
@@ -28,18 +29,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public GlobalResult<String> placeOrder(PlaceOrderReq placeOrderReq) {
 
-        GlobalResult<UserAccountVO> userAccountResult = businessFeign.getUserAccount(placeOrderReq.getUserId());
-        if (userAccountResult.isFailure()) {
-            return GlobalResult.DefaultFailure(userAccountResult.getMsg());
-        }
-
-        UserAccountVO userAccountVO = userAccountResult.getData();
-        if (userAccountVO.getBalance().compareTo(placeOrderReq.getTotalMoney()) == -1) {
-            return GlobalResult.DefaultFailure("余额不足");
-        }
-
-        userAccountVO.setBalance(userAccountVO.getBalance().subtract(placeOrderReq.getTotalMoney()));
-        businessFeign.subUserAccountBalance(userAccountVO);
 
         UserOrderVO userOrderVO = new UserOrderVO();
         userOrderVO.setUserId(placeOrderReq.getUserId());
@@ -47,6 +36,15 @@ public class OrderServiceImpl implements OrderService {
         userOrderVO.setQuantity(placeOrderReq.getQuantity());
         userOrderVO.setTotalMoney(placeOrderReq.getTotalMoney());
         businessFeign.addUserOrder(userOrderVO);
+
+        UserAccountVO userAccountVO = new UserAccountVO();
+        userAccountVO.setId(1L);
+        userAccountVO.setBalance(placeOrderReq.getTotalMoney());
+        businessFeign.subUserAccountBalance(userAccountVO);
+
+        CommodityStorageVO commodityStorageVO = new CommodityStorageVO();
+        commodityStorageVO.setId(1L);
+        commodityStorageVO.setStorageAmount(placeOrderReq.getQuantity());
 
         return GlobalResult.DefaultSuccess();
 

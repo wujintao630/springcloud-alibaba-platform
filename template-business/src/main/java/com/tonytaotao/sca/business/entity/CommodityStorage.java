@@ -8,16 +8,15 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
- * 用户订单表
+ * 商品库存表
  * @author tonytaotao
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class UserOrder extends Model<UserOrder> {
+public class CommodityStorage extends Model<CommodityStorage> {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,24 +27,14 @@ public class UserOrder extends Model<UserOrder> {
     private Long id;
 
     /**
-     * 用户ID
-     */
-    private Long userId;
-
-    /**
      * 商品ID
      */
-    private Long commodityId;
+    private Integer commodityId;
 
     /**
-     * 数量
+     * 库存数量
      */
-    private Integer quantity;
-
-    /**
-     * 总金额
-     */
-    private BigDecimal totalMoney;
+    private Integer storageAmount;
 
 
     @Override

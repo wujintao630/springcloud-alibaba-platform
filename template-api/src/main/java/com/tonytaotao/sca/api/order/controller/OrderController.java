@@ -1,8 +1,10 @@
 package com.tonytaotao.sca.api.order.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.tonytaotao.sca.api.order.service.OrderService;
 import com.tonytaotao.sca.api.order.vo.PlaceOrderReq;
 import com.tonytaotao.sca.common.base.GlobalResult;
-import com.tonytaotao.sca.api.order.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +38,26 @@ public class OrderController {
      */
     @ApiOperation(value = "下订单", notes = "下订单")
     @PostMapping("/placeOrder")
+    @SentinelResource(value = "placeOrder", blockHandler = "blockHandlerException", fallback = "fallbackException")
     public GlobalResult placeOrder(@RequestBody @ApiParam(value = "下单请求json对象", required = true) @Validated PlaceOrderReq placeOrderReq) {
         return GlobalResult.DefaultSuccess(service.placeOrder(placeOrderReq));
+    }
+
+    /**
+     * 限流
+     * @return
+     */
+    public GlobalResult blockHandlerException(PlaceOrderReq placeOrderReq, BlockException blockException) {
+        return GlobalResult.DefaultFailure("操作频繁，限流，请稍后重试");
+    }
+
+    /**
+     * 熔断
+     * @param placeOrderReq
+     * @return
+     */
+    public GlobalResult fallbackException(PlaceOrderReq placeOrderReq) {
+        return GlobalResult.DefaultFailure("服务异常，熔断，请稍后重试");
     }
 
 }
