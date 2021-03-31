@@ -40,7 +40,14 @@ public class OrderController {
     @PostMapping("/placeOrder")
     @SentinelResource(value = "placeOrder", blockHandler = "blockHandlerException", fallback = "fallbackException")
     public GlobalResult placeOrder(@RequestBody @ApiParam(value = "下单请求json对象", required = true) @Validated PlaceOrderReq placeOrderReq) {
-        return GlobalResult.DefaultSuccess(service.placeOrder(placeOrderReq));
+
+        try {
+            GlobalResult<String> globalResult = service.placeOrder(placeOrderReq);
+        } catch (Exception e) {
+            return GlobalResult.DefaultFailure(e.getMessage());
+        }
+
+        return GlobalResult.DefaultSuccess();
     }
 
     /**

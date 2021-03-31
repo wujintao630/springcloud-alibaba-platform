@@ -1,0 +1,55 @@
+server:
+  port: 9000
+
+spring:
+  cloud:
+
+    #nacos配置
+    nacos:
+      #nacos注册中心
+      discovery:
+        server-addr: localhost:8848
+        group: tonytaotao
+      #nacos配置中心
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+
+    #gateway配置
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: template-api
+          uri: lb://template-api
+          predicates:
+            - Path=/api/**
+        - id: template-business
+          uri: lb://template-business
+          predicates:
+            - Path=/business/**
+
+
+    #sentinel配置
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8719
+      eager: true
+      datasource:
+        #限流
+        ds:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            groupId: DEFAULT_GROUP
+            data-id: ${spring.application.name}-sentinel-flow.json
+            data-type: json
+            rule-type: gw-flow
+
+#日志配置
+logging:
+  config: classpath:logConfig/log4j2-dev.xml
+

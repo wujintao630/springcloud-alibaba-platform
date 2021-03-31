@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 业务模块调用
  *
- * @author wujintao
+ * @author tonytaotao
  */
 @FeignClient(name = "template-business")
 public interface BusinessFeign {

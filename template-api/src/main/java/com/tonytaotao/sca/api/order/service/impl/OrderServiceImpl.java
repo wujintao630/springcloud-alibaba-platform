@@ -7,6 +7,7 @@ import com.tonytaotao.sca.common.vo.CommodityStorageVO;
 import com.tonytaotao.sca.common.vo.UserAccountVO;
 import com.tonytaotao.sca.common.base.GlobalResult;
 import com.tonytaotao.sca.common.vo.UserOrderVO;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private BusinessFeign businessFeign;
 
+    @GlobalTransactional
     @Override
     public GlobalResult<String> placeOrder(PlaceOrderReq placeOrderReq) {
 
@@ -40,7 +42,10 @@ public class OrderServiceImpl implements OrderService {
         UserAccountVO userAccountVO = new UserAccountVO();
         userAccountVO.setId(1L);
         userAccountVO.setBalance(placeOrderReq.getTotalMoney());
-        businessFeign.subUserAccountBalance(userAccountVO);
+        GlobalResult<String> subUserAccountBalanceResult = businessFeign.subUserAccountBalance(userAccountVO);
+        if (subUserAccountBalanceResult.isFailure()) {
+            throw new RuntimeException(subUserAccountBalanceResult.getMsg());
+        }
 
         CommodityStorageVO commodityStorageVO = new CommodityStorageVO();
         commodityStorageVO.setId(1L);

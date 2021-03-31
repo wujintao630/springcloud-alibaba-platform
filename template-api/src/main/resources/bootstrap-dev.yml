@@ -1,11 +1,12 @@
 server:
-  port: 9000
+  port: 9100
   servlet:
     context-path: /api
 
 spring:
   cloud:
 
+    #nacos配置
     nacos:
       #nacos注册中心
       discovery:
@@ -24,20 +25,20 @@ spring:
         #  - data-id: extension.yml
         #    refresh: true
 
-    #sentinel限流配置中心
+    #sentinel配置
     sentinel:
       transport:
         dashboard: 127.0.0.1:8080
         port: 8719
       eager: true
       datasource:
-        #限流配置
+        #限流
         ds1:
           nacos:
             server-addr: 127.0.0.1:8848
             data-id: ${spring.application.name}-sentinel-block.json
             rule-type: flow
-        #熔断配置
+        #熔断
         ds2:
           nacos:
             server-addr: 127.0.0.1:8848

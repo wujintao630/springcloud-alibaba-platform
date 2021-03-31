@@ -8,7 +8,7 @@
 <configuration status="warn" monitorInterval="60">
 
     <properties>
-        <property name="logpath" value="/data/logs/template-api" />
+        <property name="logpath" value="/data/logs/template-gateway" />
     </properties>
 
     <appenders>
@@ -48,16 +48,6 @@
 
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
-
-        <!-- feign日志  -->
-        <Logger additivity="false" name="com.tonytaotao.sca.api.invoke.BusinessFeign" level="DEBUG">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
-
-        <Logger additivity="false" name="com.alibaba.nacos.client.config.impl" level="WARN">
-            <AppenderRef ref="CONSOLE"/>
-        </Logger>
-
 
         <Root level="INFO" includeLocation="true">
             <!--开发过程可以开启，生产要求屏蔽-->

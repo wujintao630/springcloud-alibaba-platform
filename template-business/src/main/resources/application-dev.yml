@@ -1,5 +1,5 @@
 server:
-  port: 9100
+  port: 9200
   servlet:
     context-path: /business
 
@@ -149,6 +149,36 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     #生产环境需关闭
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+#seata分布式事务
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  #需要和config.txt 中的  service.vgroupMapping.tonytaotao_group=default  保持一致
+  tx-service-group: tonytaotao_group
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: seata
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      application: seata-server
+      namespace: seata
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  service:
+    vgroup-mapping:
+      #需要和config.txt 中的  service.vgroupMapping.tonytaotao_group=default  保持一致
+      tonytaotao_group: default
+    disable-global-transaction: false
 
 #日志配置
 logging:

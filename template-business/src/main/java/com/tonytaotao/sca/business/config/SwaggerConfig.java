@@ -34,10 +34,12 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("api文档")
-                .description("api文档")
+                .title("business接口文档")
+                .description("business接口文档")
                 .termsOfServiceUrl("http://www.tonytaotao.com")
-                .version("1.0-SNAPSHOT")
+                .license("The Apache License, Version 2.0")
+                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+                .version("1.0.0")
                 .build();
     }
 

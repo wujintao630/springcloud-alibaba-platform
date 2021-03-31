@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: template-gateway
+
+  main:
+    allow-bean-definition-overriding: true
+
+  profiles:
+    active: dev
