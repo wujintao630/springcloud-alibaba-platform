@@ -66,6 +66,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.tonytaotao</groupId>
+            <artifactId>template-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>

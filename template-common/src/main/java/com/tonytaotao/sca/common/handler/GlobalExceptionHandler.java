@@ -2,6 +2,8 @@ package com.tonytaotao.sca.common.handler;
 
 import com.tonytaotao.sca.common.base.GlobalResult;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,9 @@ import java.util.stream.Collectors;
  * RestControllerAdvice注解后，方法上只需要存在 ExceptionHandler 注解
  */
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -43,7 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public GlobalResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 
-        log.error(GlobalIDHandler.getId(), e);
+        logger.error(GlobalIDHandler.getId(), e);
 
         StringBuilder errorMsg = new StringBuilder("请求参数校验异常：");
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
@@ -67,7 +69,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public GlobalResult handleConstraintViolationException(ConstraintViolationException e) {
 
-        log.error(GlobalIDHandler.getId(), e);
+        logger.error(GlobalIDHandler.getId(), e);
 
         StringBuilder errorMsg = new StringBuilder("请求参数校验异常：");
 
@@ -85,14 +87,13 @@ public class GlobalExceptionHandler {
 
     /**
      * 默认异常处理
-     * @param request
      * @param e
      * @return
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public GlobalResult defaultErrorHandler(HttpServletRequest request, Exception e) {
-        log.error(GlobalIDHandler.getId(), e);
+    public GlobalResult defaultErrorHandler(Exception e) {
+        logger.error(GlobalIDHandler.getId(), e);
 
         String errorMsg = "系统异常:" + e.getMessage();
         GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg);

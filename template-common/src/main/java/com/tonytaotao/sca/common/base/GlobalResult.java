@@ -6,7 +6,6 @@ import lombok.Data;
  * 全局结果返回
  * @author tonytaotao
  */
-@Data
 public class GlobalResult<T> {
 
     private static String SUCCESS_CODE = "0";
@@ -21,6 +20,9 @@ public class GlobalResult<T> {
     private T data;
 
     private String requestId;
+
+    public GlobalResult() {
+    }
 
     public GlobalResult(String code, String msg, Boolean success, T data) {
         this.code = code;
@@ -67,5 +69,57 @@ public class GlobalResult<T> {
 
     public boolean isFailure() {
         return success.booleanValue() == Boolean.FALSE.booleanValue();
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("GlobalResult{");
+        sb.append("code='").append(code).append('\'');
+        sb.append(", msg='").append(msg).append('\'');
+        sb.append(", success=").append(success);
+        sb.append(", data=").append(data);
+        sb.append(", requestId='").append(requestId).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
