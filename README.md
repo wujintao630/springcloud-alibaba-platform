@@ -249,6 +249,39 @@ seata-server.bat -p 8091 -m db
 ```
 System.setProperty("csp.sentinel.app.type", "1");
 ```
+####3 nacos限流配置示例
+```
+[
+  {
+    "resource": "account-service",
+    "count": 5,
+    "grade": 1,
+    "paramItem": {
+        "parseStrategy": 0
+    }
+  }
+]
+
+说明（字段详见 com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule）
+
+resource:资源名称，可以是网关中的 route 名称或者用户自定义的API 分组名称
+resourceMode:API类型（0:RouteId, 1:API分组），规则是针对 API Gateway 的route（RESOURCE_MODE_ROUTE_ID）还是用户在 Sentinel 中定义的API 分组（RESOURCE_MODE_CUSTOM_API_NAME），默认是route
+grade：阈值类型（0：QPS，1：线程数）， 详见com.alibaba.csp.sentinel.slots.block.RuleConstant
+count：阈值
+intervalSec：间隔，统计时间窗口，单位是秒，默认是1 秒（目前仅对grade=0生效）
+controlBehavior：流控方式，流量整形的控制效果，同限流规则的 controlBehavior 字段，（0：快速失败，1：匀速排队），默认是快速失败
+burst：Burst size，应对突发请求时额外允许的请求数目（目前仅对grade=0生效）
+maxQueueingTimeoutMs：匀速排队模式下的最长排队时间，单位是毫秒，仅在匀速排队模式下生效
+paramItem：参数限流配置。若不提供，则代表不针对参数进行限流，该网关规则将会被转换成普通流控规则；否则会转换成热点规则。其中的字段：
+    parseStrategy：从请求中提取参数的策略，目前支持提取来源,详见 com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants
+            0：IP（PARAM_PARSE_STRATEGY_CLIENT_IP）
+            1：Host（PARAM_PARSE_STRATEGY_HOST）
+            2：任意 Header（PARAM_PARSE_STRATEGY_HEADER）
+            3：任意 URL 参数（PARAM_PARSE_STRATEGY_URL_PARAM）
+            4：Cookie（PARAM_PARSE_STRATEGY_COOKIE）
+    fieldName：若提取策略选择 Header 模式或 URL 参数模式，则需要指定对应的 header 名称或 URL 参数名称
+
+```
 
 
 
