@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+
+spring:
+  application:
+    name: tonytaotao-spring-cloud-starter-demo
+
+  main:
+    allow-bean-definition-overriding: true
+
+
+#日志配置
+logging:
+  config: classpath:logConfig/log4j2-dev.xml
+
+tonytaotao:
+  swagger:
+    enabled: true
+    base-package: com.tonytaotao
+    title: demo
+    description: demo
+    service-url: http://localhost:8080
+    license: Apache
+    license-url: apache.com
+    version: 1.0.0

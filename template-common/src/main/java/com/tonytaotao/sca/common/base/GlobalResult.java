@@ -1,7 +1,5 @@
 package com.tonytaotao.sca.common.base;
 
-import lombok.Data;
-
 /**
  * 全局结果返回
  * @author tonytaotao

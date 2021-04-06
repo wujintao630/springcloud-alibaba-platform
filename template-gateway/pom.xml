@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.tonytaotao</groupId>
         <artifactId>springcloud-alibaba-platform</artifactId>
-        <version>${revision}</version>
+        <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>template-gateway</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>template-gateway</name>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.tonytaotao</groupId>
             <artifactId>template-common</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>

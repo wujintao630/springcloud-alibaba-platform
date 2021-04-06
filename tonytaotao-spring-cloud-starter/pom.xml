@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.tonytaotao</groupId>
+        <artifactId>springcloud-alibaba-platform</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.tonytaotao</groupId>
+    <artifactId>tonytaotao-spring-cloud-starter</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>tonytaotao-spring-cloud-starter</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tonytaotao</groupId>
+            <artifactId>tonytaotao-spring-cloud-autoconfigure</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+</project>
