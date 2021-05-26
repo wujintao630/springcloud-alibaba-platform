@@ -1,16 +1,12 @@
 package com.tonytaotao.sca.business.controller;
 
 import com.tonytaotao.sca.business.entity.CommodityStorage;
-import com.tonytaotao.sca.business.entity.UserOrder;
 import com.tonytaotao.sca.business.service.CommodityStorageService;
-import com.tonytaotao.sca.business.service.UserOrderService;
 import com.tonytaotao.sca.common.base.GlobalResult;
 import com.tonytaotao.sca.common.vo.CommodityStorageVO;
-import com.tonytaotao.sca.common.vo.UserOrderVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

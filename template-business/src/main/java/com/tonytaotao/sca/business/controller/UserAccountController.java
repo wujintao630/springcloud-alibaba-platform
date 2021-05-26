@@ -1,6 +1,5 @@
 package com.tonytaotao.sca.business.controller;
 
-import com.tonytaotao.sca.business.entity.CommodityStorage;
 import com.tonytaotao.sca.business.entity.UserAccount;
 import com.tonytaotao.sca.business.service.UserAccountService;
 import com.tonytaotao.sca.common.base.GlobalResult;
@@ -34,7 +33,7 @@ public class UserAccountController {
     @GetMapping("/getUserAccountDetail/{id}")
     public GlobalResult<UserAccountVO> getUserAccountDetailById(@PathVariable Long id) {
 
-        UserAccount userAccount = userAccountService.getById(id);
+        com.tonytaotao.sca.business.entity.UserAccount userAccount = userAccountService.getById(id);
         if (userAccount != null) {
             UserAccountVO userAccountVO = new UserAccountVO();
             BeanUtils.copyProperties(userAccount, userAccountVO);

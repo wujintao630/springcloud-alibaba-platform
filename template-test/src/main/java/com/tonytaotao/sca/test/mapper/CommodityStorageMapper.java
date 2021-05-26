@@ -1,7 +1,7 @@
-package com.tonytaotao.sca.business.mapper;
+package com.tonytaotao.sca.test.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tonytaotao.sca.business.entity.CommodityStorage;
+import com.tonytaotao.sca.test.entity.CommodityStorage;
 
 /**
  * 商品库存Mapper

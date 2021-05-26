@@ -2,8 +2,8 @@ package com.tonytaotao.sca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SpringBootApplication
 @RestController
-@EnableAspectJAutoProxy(exposeProxy = true)
-@EnableDiscoveryClient
-public class BusinessApplication {
+@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
+@EnableTransactionManagement(proxyTargetClass = true)
+public class TestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TestApplication.class, args);

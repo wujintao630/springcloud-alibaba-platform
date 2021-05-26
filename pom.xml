@@ -42,6 +42,7 @@
         <module>tonytaotao-spring-cloud-starter</module>
         <module>tonytaotao-spring-cloud-autoconfigure</module>
         <module>tonytaotao-spring-cloud-starter-demo</module>
+        <module>template-test</module>
     </modules>
 
 </project>

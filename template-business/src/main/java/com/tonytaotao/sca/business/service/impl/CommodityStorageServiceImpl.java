@@ -2,11 +2,8 @@ package com.tonytaotao.sca.business.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tonytaotao.sca.business.entity.CommodityStorage;
-import com.tonytaotao.sca.business.entity.UserAccount;
 import com.tonytaotao.sca.business.mapper.CommodityStorageMapper;
-import com.tonytaotao.sca.business.mapper.UserAccountMapper;
 import com.tonytaotao.sca.business.service.CommodityStorageService;
-import com.tonytaotao.sca.business.service.UserAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

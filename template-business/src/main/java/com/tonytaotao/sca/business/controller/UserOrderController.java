@@ -2,10 +2,10 @@ package com.tonytaotao.sca.business.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tonytaotao.sca.business.common.QueryPage;
 import com.tonytaotao.sca.business.entity.UserOrder;
 import com.tonytaotao.sca.business.service.UserOrderService;
 import com.tonytaotao.sca.common.base.GlobalResult;
-import com.tonytaotao.sca.business.common.QueryPage;
 import com.tonytaotao.sca.common.vo.UserOrderVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +37,7 @@ public class UserOrderController {
     @ApiOperation(value = "获取详细信息", notes = "根据url的id来获取详细信息")
     @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "Path")
     @GetMapping("/getOrderDetail/{id}")
-    public GlobalResult<UserOrder> getOrderDetailById(@PathVariable Long id) {
+    public GlobalResult<com.tonytaotao.sca.business.entity.UserOrder> getOrderDetailById(@PathVariable Long id) {
         return GlobalResult.DefaultSuccess(userOrderService.getById(id));
     }
 
@@ -48,7 +48,7 @@ public class UserOrderController {
      */
     @ApiOperation(value = "分页获取详细信息，带上查询条件", notes = "根据查询条件分页获取明细")
     @PostMapping("/getOrderPage")
-    public GlobalResult<IPage<List<UserOrder>>> getOrderPage(@RequestBody @ApiParam(value = "查询条件json对象", required = true) QueryPage<UserOrder> query) {
+    public GlobalResult<IPage<List<com.tonytaotao.sca.business.entity.UserOrder>>> getOrderPage(@RequestBody @ApiParam(value = "查询条件json对象", required = true) QueryPage<com.tonytaotao.sca.business.entity.UserOrder> query) {
         IPage page = userOrderService.page(query.getPage(), new QueryWrapper<>(query.getQueryEntity()));
         return GlobalResult.DefaultSuccess(page);
     }
@@ -62,7 +62,7 @@ public class UserOrderController {
     @ApiImplicitParam(name = "entity", value = "要保存的json对象", required = true, paramType = "body", dataType = "UserOrderVO")
     @PostMapping("/saveOrUpdateOrder")
     public GlobalResult<String> saveOrUpdateOrder(@RequestBody UserOrderVO userOrderVO) {
-        UserOrder userOrder = new UserOrder();
+        com.tonytaotao.sca.business.entity.UserOrder userOrder = new UserOrder();
         BeanUtils.copyProperties(userOrderVO, userOrder);
         userOrderService.saveOrUpdate(userOrder);
         return GlobalResult.DefaultSuccess();
