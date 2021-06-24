@@ -54,7 +54,7 @@
             <AppenderRef ref="CONSOLE"/>
         </Logger>
 
-        <Root level="INFO" includeLocation="true">
+        <Root level="DEBUG" includeLocation="true">
             <!--开发过程可以开启，生产要求屏蔽-->
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="INFO"/>

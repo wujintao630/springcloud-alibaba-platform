@@ -9,8 +9,8 @@ public interface TransactionService {
      *
      * @return
      */
-    String testTransaction();
+    String testTransaction() throws Exception;
 
-     void addUserAccount();
+     void addUserAccount() throws Exception;
 
 }

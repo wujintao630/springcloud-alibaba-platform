@@ -23,7 +23,7 @@ public class TransactionController {
      * @return
      */
     @RequestMapping("/testTransaction")
-    public GlobalResult<String> testTransaction() {
+    public GlobalResult<String> testTransaction() throws Exception {
         userOrderService.testTransaction();
         return GlobalResult.DefaultSuccess();
     }

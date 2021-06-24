@@ -35,8 +35,8 @@ public class TransactionServiceImpl implements TransactionService {
     private TransactionService transactionService;
 
     @Override
-    //@Transactional(rollbackFor = Exception.class)
-    public String testTransaction() {
+    @Transactional(rollbackFor = Exception.class)
+    public String testTransaction() throws Exception {
         UserOrder userOrder = new UserOrder();
         userOrder.setUserId(2L);
         userOrder.setCommodityId(1L);
@@ -44,23 +44,23 @@ public class TransactionServiceImpl implements TransactionService {
         userOrder.setTotalMoney(BigDecimal.TEN);
         userOrderMapper.insert(userOrder);
 
-        addUserAccount();
-        //((TransactionServiceImpl) AopContext.currentProxy()).addUserAccount();
-        applicationContext.getBean(TransactionServiceImpl.class).addUserAccount();
-        //transactionService.addUserAccount();
+
+
+            applicationContext.getBean(TransactionServiceImpl.class).addUserAccount();
+
 
 
         return "Success";
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void addUserAccount() {
+   // @Transactional(rollbackFor = Exception.class)
+    public void addUserAccount() throws Exception {
         UserAccount userAccount = new UserAccount();
         userAccount.setUserId(2L);
         userAccount.setBalance(BigDecimal.ONE);
         userAccountMapper.insert(userAccount);
 
-        int i = 1/0;
+        throw new Exception("test");
     }
 }
