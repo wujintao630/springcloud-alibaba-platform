@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: scp-gateway
+
+  main:
+    allow-bean-definition-overriding: true
+
+  profiles:
+    active: dev

@@ -25,7 +25,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.tonytaotao</groupId>
-                <artifactId>template-bom</artifactId>
+                <artifactId>scp-bom</artifactId>
                 <version>1.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -34,15 +34,16 @@
     </dependencyManagement>
 
     <modules>
-        <module>template-api</module>
-        <module>template-business</module>
-        <module>template-common</module>
-        <module>template-bom</module>
-        <module>template-gateway</module>
+        <module>scp-code-generation</module>
+        <module>scp-api</module>
+        <module>scp-bom</module>
+        <module>scp-common</module>
+        <module>scp-business</module>
+        <module>scp-gateway</module>
+        <module>scp-test</module>
         <module>tonytaotao-spring-cloud-starter</module>
         <module>tonytaotao-spring-cloud-autoconfigure</module>
         <module>tonytaotao-spring-cloud-starter-demo</module>
-        <module>template-test</module>
     </modules>
 
 </project>

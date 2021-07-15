@@ -1,0 +1,105 @@
+package com.tonytaotao.scp.common.handler;
+
+import com.tonytaotao.scp.common.base.GlobalResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolationException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 处理全局异常（controller层抛出）
+ * @author tonytaotao
+ *
+ * ControllerAdvice 和 RestControllerAdvice 区别：
+ * ControllerAdvice注解后，方法上要同时存在 ExceptionHandler 和 ResponseBody 注解
+ * RestControllerAdvice注解后，方法上只需要存在 ExceptionHandler 注解
+ */
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        GlobalIDHandler.setId();
+    }
+
+    /**
+     * 参数校验异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public GlobalResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+
+        logger.error(GlobalIDHandler.getId(), e);
+
+        StringBuilder errorMsg = new StringBuilder("请求参数校验异常：");
+        List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
+        String msg = allErrors.stream().map(objectError -> {
+           return objectError instanceof FieldError ? "参数[" + ((FieldError)objectError).getField() + "] -> " + objectError.getDefaultMessage() : objectError.getDefaultMessage();
+        }).collect(Collectors.joining(", "));
+        errorMsg.append(msg).append(".");
+
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg.toString());
+        globalResult.setRequestId(GlobalIDHandler.getId());
+
+        return globalResult;
+    }
+
+    /**
+     * 参数校验异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public GlobalResult handleConstraintViolationException(ConstraintViolationException e) {
+
+        logger.error(GlobalIDHandler.getId(), e);
+
+        StringBuilder errorMsg = new StringBuilder("请求参数校验异常：");
+
+        String msg = e.getConstraintViolations().stream().map(constraintViolation -> {
+            return constraintViolation.getPropertyPath() + " -> " + constraintViolation.getMessage();
+        }).collect(Collectors.joining(", "));
+
+        errorMsg.append(msg).append(".");
+
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg.toString());
+        globalResult.setRequestId(GlobalIDHandler.getId());
+
+        return globalResult;
+    }
+
+    /**
+     * 默认异常处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = Exception.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public GlobalResult defaultErrorHandler(Exception e) {
+        logger.error(GlobalIDHandler.getId(), e);
+
+        String errorMsg = "系统异常:" + e.getMessage();
+        GlobalResult globalResult = GlobalResult.DefaultFailure("500", errorMsg);
+        globalResult.setRequestId(GlobalIDHandler.getId());
+
+        return globalResult;
+    }
+
+
+}

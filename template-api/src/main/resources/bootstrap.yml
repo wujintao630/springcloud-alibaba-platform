@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: template-api
-
-  main:
-    allow-bean-definition-overriding: true
-
-  profiles:
-    active: dev

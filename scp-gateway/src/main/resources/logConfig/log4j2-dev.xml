@@ -8,7 +8,7 @@
 <configuration status="warn" monitorInterval="60">
 
     <properties>
-        <property name="logpath" value="/data/logs/scp-api" />
+        <property name="logpath" value="/data/logs/scp-gateway" />
     </properties>
 
     <appenders>
