@@ -40,6 +40,9 @@
         <module>scp-common</module>
         <module>scp-business</module>
         <module>scp-gateway</module>
+        <module>scp-eureka</module>
+        <module>scp-hystrix</module>
+        <module>scp-zuul</module>
         <module>scp-test</module>
         <module>tonytaotao-spring-cloud-starter</module>
         <module>tonytaotao-spring-cloud-autoconfigure</module>
