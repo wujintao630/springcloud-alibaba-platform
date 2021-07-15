@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tonytaotao</groupId>
-    <artifactId>scp--code-generation</artifactId>
+    <artifactId>scp-code-generation</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>scp--code-generation</name>
+    <name>scp-code-generation</name>
     <description>代码自动生成</description>
 
     <parent>
