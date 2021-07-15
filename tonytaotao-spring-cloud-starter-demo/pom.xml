@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>springcloud-alibaba-platform</artifactId>
+        <artifactId>springcloud-platform</artifactId>
         <groupId>com.tonytaotao</groupId>
         <version>1.0.0</version>
     </parent>
 
     <groupId>com.tonytaotao</groupId>
-    <artifactId>tonytaotao-spring-cloud-starter-test</artifactId>
+    <artifactId>tonytaotao-spring-cloud-starter-demo</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>tonytaotao-spring-cloud-starter-test</name>
+    <name>tonytaotao-spring-cloud-starter-demo</name>
 
     <dependencies>
 

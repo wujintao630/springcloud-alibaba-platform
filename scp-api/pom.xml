@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.tonytaotao</groupId>
-        <artifactId>springcloud-alibaba-platform</artifactId>
+        <artifactId>springcloud-platform</artifactId>
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

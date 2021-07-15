@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tonytaotao</groupId>
-    <artifactId>springcloud-alibaba-platform</artifactId>
+    <artifactId>springcloud-platform</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>springcloud-alibaba-platform</name>
+    <name>springcloud-platform</name>
     <description>springcloud alibaba体系示例</description>
 
     <properties>
